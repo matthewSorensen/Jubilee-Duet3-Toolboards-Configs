@@ -1,9 +1,7 @@
 	; Jubilee CoreXY ToolChanging Printer - Config File
-	; This file intended for Duet 3 hardware; 6HC Mainboard; 3HC Expansion Board (CAN 1); Toolboard (CAN 20); Toolboard (CAN 21)
+	; This file intended for Duet 3 hardware; 6HC Mainboard; 3HC Expansion Board (CAN 1); LDO REL motor
 	; As of 4/08/2020 INCOMPLETE AND ONLY PARTIALLY TESTED.  See the discord for more info. 
 
-	; Name and Identification
-	; Printer name is now set on the R Pi. 
 
 
 ; Communication and general -------------------------------------------------------------------------------------------------------------------------------------
@@ -13,7 +11,6 @@
 	M929 P"eventlog.txt" S1						; Start logging to file eventlog.txt
 
 	; General Preferences
-	;M550 P"Jubilee"							; Sets printer name to Jubilee
 	M555 P2										; Set Marlin-style output
 	G21											; Set dimensions to millimetres
 	G90											; Send absolute coordinates...
@@ -25,6 +22,7 @@
 	M584 X0 Y2 									; X and Y for CoreXY
 	M584 U1 									; U for toolchanger lock
 	M584 Z3:4:5						 			; Z has three drivers for kinematic bed suspension
+    M584 E1.0                                   ; One extruder on the 3HC expansion board 
 
 	M569 P0 S1									; Drive 0 | X stepper	
 	M569 P2 S1									; Drive 2 | Y Stepper
@@ -34,6 +32,8 @@
 	M569 P3 S0									; Drive 3 | Front Left Z
 	M569 P4 S0									; Drive 4 | Back Z
 	M569 P5 S0									; Drive 5 | Front Right Z
+
+    M569 P1.0 D2  S0                            ; Drive 1.0 | Extruder 0
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@
 	M350 Z16 I1									; Set 16x microstepping for Z axes. Use interpolation.
 	M350 E16 I1									; Set 16x microstepping for Extruder axes. Use interpolation.
 
-	M906 X1900 Y1900 Z1700 I30			        ; Motor currents (mA) and Idle percentage
+    M906 X1900 Y1900 Z1700 I30			        ; Motor currents (mA) and Idle percentage
 	M906 U670 I60								; For LDO motor
 
 	
