@@ -26,13 +26,6 @@
 	M584 U1 									; U for toolchanger lock
 	M584 Z3:4:5						 			; Z has three drivers for kinematic bed suspension
 
-    
-; Duet3 3HC board - 3x extruders
-    
-	
-	; Duet3 Tool Boards | CAN Bus Addresses begin at 20
-    ;M584 E20.0:21.0								; Define all Extruders on this line 
-
 	M569 P0 S1									; Drive 0 | X stepper	
 	M569 P2 S1									; Drive 2 | Y Stepper
 
@@ -41,17 +34,6 @@
 	M569 P3 S0									; Drive 3 | Front Left Z
 	M569 P4 S0									; Drive 4 | Back Z
 	M569 P5 S0									; Drive 5 | Front Right Z
-	
-	; End of main board drivers.  Expansion boards have three each.
-
-	; Duet3 3HC Expansion Board CAN Bus Address 1
-    ;M569 P1.0 S1								; Drive for Swing-Out Brush
-	; M568 P1.1 S0
-	; M569 P1.2 S2
-
-	; Tool Boad drivers go here
-    ;M569 P20.0 D2 S0 								; Drive 20 | Extruder T0
-    ;M569 P21.0 D2 S0								; Drive 21 | Extruder T1
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,22 +52,24 @@
 	M350 Z16 I1									; Set 16x microstepping for Z axes. Use interpolation.
 	M350 E16 I1									; Set 16x microstepping for Extruder axes. Use interpolation.
 
-	M906 X1900 Y1900 Z1700 I30			; Motor currents (mA) and Idle percentage
-	M906 U1100 I60								; Motor currents (mA) and Idle percentage
+	M906 X1900 Y1900 Z1700 I30			        ; Motor currents (mA) and Idle percentage
+	M906 U670 I60								; For LDO motor
+
 	
-	M201 X750 Y750 Z100 U1000 B50			; Accelerations (mm/s^2)
+	M201 X750 Y750 Z100 U1000			; Accelerations (mm/s^2)
 	M203 X13000 Y13000 Z1000 U10000 	; Maximum speeds (mm/min)
 	M566 X480 Y480 Z800 U200 			; Maximum jerk speeds mm/minute
 
 	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
-	M92 Z3200									; Steps/mm for Z - TR8*4 / 0.9 deg stepper
-	M92 U11.429									; Steps/mm for tool lock geared motor. 
+	M92 Z3200								   ; Steps/mm for Z - TR8*4 / 0.9 deg stepper
+	M92 30.578								   ; Steps/mm for tool lock geared motor - again, LDO
 
 
 ; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------
-	M574 X1 S1 P"io0.in"						; Set homing switch configuration X1 = low-end, S1 = active-high (NC)
-	M574 Y1 S1 P"io1.in"						; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
-	M574 U1 S1 P"io3.in"						; Set homing switch configuration Z1 = low-end, S1 = active-high (NC)
+;
+	M574 X1 S1 P"io0.in"						; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
+	M574 Y1 S1 P"io1.in"						; Dito
+	M574 U1 S1 P"io3.in"						; Dito
 
     M558 P5 C"io4.in" H3 A1 T6000 S0.02
 
