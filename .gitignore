@@ -1,3 +1,4 @@
 sys/heightmap.csv
 sys/eventlog.txt
-
+*~
+*.DS_STORE
