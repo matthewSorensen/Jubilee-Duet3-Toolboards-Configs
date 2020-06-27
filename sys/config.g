@@ -33,7 +33,7 @@
 	M569 P4 S0									; Drive 4 | Back Z
 	M569 P5 S0									; Drive 5 | Front Right Z
 
-    M569 P1.0 D2  S0                            ; Drive 1.0 | Extruder 0
+    M569 P1.0 D2  S1                            ; Drive 1.0 | Extruder 0
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,17 +52,18 @@
 	M350 Z16 I1									; Set 16x microstepping for Z axes. Use interpolation.
 	M350 E16 I1									; Set 16x microstepping for Extruder axes. Use interpolation.
 
-    M906 X1900 Y1900 Z1700 I30			        ; Motor currents (mA) and Idle percentage
-	M906 U670 I60								; For LDO motor
+    M906 X1900 Y1900 Z1700 E1250 I30			        ; Motor currents (mA) and Idle percentage
+	M906 U800 I60								; For LDO motor
 
 	
-	M201 X750 Y750 Z100 U1000			; Accelerations (mm/s^2)
-	M203 X13000 Y13000 Z1000 U10000 	; Maximum speeds (mm/min)
-	M566 X480 Y480 Z800 U200 			; Maximum jerk speeds mm/minute
+	M201 X750 Y750 Z100 U1000 E1300			; Accelerations (mm/s^2)
+	M203 X13000 Y13000 Z1000 U10000 E8000 	; Maximum speeds (mm/min)
+	M566 X480 Y480 Z800 U200 E3000 			; Maximum jerk speeds mm/minute
 
 	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
 	M92 Z3200								   ; Steps/mm for Z - TR8*4 / 0.9 deg stepper
 	M92 30.578								   ; Steps/mm for tool lock geared motor - again, LDO
+    M92 E830
 
 
 ; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------
