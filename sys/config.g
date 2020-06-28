@@ -57,7 +57,7 @@
 
 	
 	M201 X750 Y750 Z100 U1000 E1300			; Accelerations (mm/s^2)
-	M203 X13000 Y13000 Z1000 U10000 E8000 	; Maximum speeds (mm/min)
+	M203 X13000 Y13000 Z500 U10000 E8000 	; Maximum speeds (mm/min)
 	M566 X480 Y480 Z800 U200 E3000 			; Maximum jerk speeds mm/minute
 
 	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
