@@ -52,12 +52,12 @@
 	M350 Z16 I1									; Set 16x microstepping for Z axes. Use interpolation.
 	M350 E16 I1									; Set 16x microstepping for Extruder axes. Use interpolation.
 
-    M906 X1900 Y1900 Z1700 E1250 I30			        ; Motor currents (mA) and Idle percentage
+    M906 X1900 Y1900 Z1500 E1250 I30			        ; Motor currents (mA) and Idle percentage
 	M906 U800 I60								; For LDO motor
 
 	
-	M201 X750 Y750 Z100 U1000 E1300			; Accelerations (mm/s^2)
-	M203 X13000 Y13000 Z500 U10000 E8000 	; Maximum speeds (mm/min)
+	M201 X700 Y700 Z100 U1000 E1300			; Accelerations (mm/s^2)
+	M203 X10000 Y10000 Z500 U10000 E8000 	; Maximum speeds (mm/min)
 	M566 X480 Y480 Z800 U200 E3000 			; Maximum jerk speeds mm/minute
 
 	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
@@ -81,3 +81,7 @@
 
 ; Call out to the tool-specific file 
 M98 P"/sys/tool_0.g"
+M98 P"/sys/bed_heater.g"
+
+
+G10	P0 Z-3.00
