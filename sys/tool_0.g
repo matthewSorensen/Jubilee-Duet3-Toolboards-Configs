@@ -8,7 +8,7 @@ M307 H1 A540.8 C217.6 D4.7 V23.9 B0 ;Auto tune results
 M950 F1 C"1.out6"											; Define Hotend Fan on out1
 M106 P1 S255 T45 H1											; Setup Hotend Fan for thermal control, full on when H1 reaches 45C
 
-M950 F2 C"1.out7"											; Define Part Cooling fan on out2
+M950 F2 C"1.out3"											; Define Part Cooling fan on out2
 M106 P2 C"Part Cooling T0"									; Setup Part Cooling Fan as Part Cooling T0
 
 M563 P0 S"Tool 0" D0 H1 F2									; Px = Tool number, Dx = Drive Number (start at 0, after movement drives), Hx = Heater Number, Fx = Fan number print cooling fan

@@ -21,6 +21,10 @@
 ; Axis to driver mapping -----------------------------------------------------------------------------------------------------------------------------------------
 	M584 X0 Y2 									; X and Y for CoreXY
 	M584 U1 									; U for toolchanger lock
+	M584 V1.1 									; V for the proboscis
+	M584 W1.2 									; V for the snip
+
+
 	M584 Z3:4:5						 			; Z has three drivers for kinematic bed suspension
     M584 E1.0                                   ; One extruder on the 3HC expansion board 
 
@@ -34,6 +38,10 @@
 	M569 P5 S0									; Drive 5 | Front Right Z
 
     M569 P1.0 D2  S1                            ; Drive 1.0 | Extruder 0
+
+
+    M569 P1.1 D2  S0                            ; Drive 1.1 | proboscis
+    M569 P1.2 D2  S1                            ; Drive 1.2 | snip
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,12 +60,26 @@
 	M350 Z16 I1									; Set 16x microstepping for Z axes. Use interpolation.
 	M350 E16 I1									; Set 16x microstepping for Extruder axes. Use interpolation.
 
-    M906 X1900 Y1900 Z1500 E1250 I30			        ; Motor currents (mA) and Idle percentage
+
+	M350 V16 I1									; Set 16x microstepping for proboscis and snip axes. Use interpolation.
+	M350 W16 I1									
+    M906 V400 I30
+    M906 W1500 I30
+    M201 V1000 W100
+    M203 V3000 W10000
+    M92 V185.2
+    M92 W100
+
+
+
+    M906 X1900 Y1900 Z1700 E1250 I30			        ; Motor currents (mA) and Idle percentage
 	M906 U800 I60								; For LDO motor
 
+
+
 	
-	M201 X700 Y700 Z100 U1000 E1300			; Accelerations (mm/s^2)
-	M203 X10000 Y10000 Z500 U10000 E8000 	; Maximum speeds (mm/min)
+	M201 X700 Y700 Z5 U1000 E1300			; Accelerations (mm/s^2)
+	M203 X10000 Y10000 Z800 U10000 E8000 	; Maximum speeds (mm/min)
 	M566 X480 Y480 Z800 U200 E3000 			; Maximum jerk speeds mm/minute
 
 	M92 X200 Y200								; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
@@ -84,4 +106,17 @@ M98 P"/sys/tool_0.g"
 M98 P"/sys/bed_heater.g"
 
 
-G10	P0 Z-3.00
+M563 P1 S"Camera"
+
+M563 P2 S"Proboscis"
+
+G10	P0 Z-3.20
+G10	P1 Z-9.90
+
+G10 P2 X5.17 Y-11.22 Z-24.40
+
+G92 W0 V0
+
+
+
+M950 S0 C"1.io0.out" Q1000

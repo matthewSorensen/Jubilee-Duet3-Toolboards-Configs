@@ -9,3 +9,6 @@ M98 P"homex.g"
 M98 P"homeu.g"
 
 M98 P"homez.g"
+
+
+G92 V0 W0
