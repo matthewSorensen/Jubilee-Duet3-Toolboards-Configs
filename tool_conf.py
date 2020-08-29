@@ -59,7 +59,7 @@ G1 R2 X0 Y0 Z0   ; Restore prior position now accounting for new tool offset
 M106 R2           ; restore print cooling fan speed
 """
 
-tools = [(0, (50, 338))]
+tools = [(0, (10, 320))]
 
 for t in tools:
     for prefix,f in [("tpre",tpre),("tfree",tfree),("tpost",tpost)]:
