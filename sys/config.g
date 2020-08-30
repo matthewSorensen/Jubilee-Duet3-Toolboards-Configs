@@ -81,6 +81,7 @@
 
 ; Call out to the tool-specific file 
 M98 P"/sys/tool_0.g"
+M98 P"/sys/tool_1.g"
 M98 P"/sys/bed_heater.g"
 
 
