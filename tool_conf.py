@@ -1,6 +1,6 @@
 import os.path
 
-def tfree(n, park_coords, offset = 50, retract = 21):
+def tfree(n, park_coords, offset = 55, retract = 21):
     x,y = park_coords
     return f"""; Runs at the start of a toolchange if the current tool is tool-{n}.
 ; Note: tool offsets are applied at this point unless we preempt commands with G53!
@@ -14,7 +14,7 @@ M98 P"/macros/tool_unlock.g" ; Unlock the tool
 G53 G1 Y{y - retract} F6000       ; Retract the pin.
 """
 
-def tpre(n, park_coords, offset = 50):
+def tpre(n, park_coords, offset = 55):
     x,y = park_coords
 
     return f""";Runs after freeing the previous tool if the next tool is tool-{n}.
@@ -25,7 +25,7 @@ G60 S2               ; Save this position as the reference point from which to l
 """
 
 
-def tpost(n, park_coords, offset = 50, push = 0.5, extra_wipes = 0, wipe_offset = 4):
+def tpost(n, park_coords, offset = 55, push = 0.5, extra_wipes = 0, wipe_offset = 4):
     x,y = park_coords
 
     wipes = f"""G53 G1 Y{y - wipe_offset} F10000\nG53 G1 Y{y - offset} F10000\n""" * extra_wipes
@@ -59,7 +59,7 @@ G1 R2 X0 Y0 Z0   ; Restore prior position now accounting for new tool offset
 M106 R2           ; restore print cooling fan speed
 """
 
-tools = [(0, (10, 320))]
+tools = [(0, (10, 320)),(1, (130, 320)),(2, (210, 320))]
 
 for t in tools:
     for prefix,f in [("tpre",tpre),("tfree",tfree),("tpost",tpost)]:

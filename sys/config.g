@@ -22,7 +22,7 @@
     M584 X0 Y2                                  ; X and Y for CoreXY
     M584 U1                                     ; U for toolchanger lock
     M584 Z3:4:5                                 ; Z has three drivers for kinematic bed suspension
-    M584 E1.0                                   ; One extruder on the 3HC expansion board 
+    M584 E1.0:1.1                               ; Two extruders on the 3HC expansion board 
 
     M569 P0 S1                                  ; Drive 0 | X stepper   
     M569 P2 S1                                  ; Drive 2 | Y Stepper
@@ -34,6 +34,7 @@
     M569 P5 S0                                  ; Drive 5 | Front Right Z
 
     M569 P1.0 D2  S1                            ; Drive 1.0 | Extruder 0
+    M569 P1.1 D2  S1                            ; Drive 1.0 | Extruder 0
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,18 +53,19 @@
     M350 Z16 I1                                 ; Set 16x microstepping for Z axes. Use interpolation.
     M350 E16 I1                                 ; Set 16x microstepping for Extruder axes. Use interpolation.
 
-    M906 X1900 Y1900 Z1700 E1250 I30            ; Motor currents (mA) and Idle percentage
+    M906 X1900 Y1900 Z1700 E1250:1330 I30            ; Motor currents (mA) and Idle percentage
     M906 U800 I60                               ; For LDO motor
 
     
-    M201 X700 Y700 Z10 U1000 E1300          ; Accelerations (mm/s^2)
-    M203 X10000 Y10000 Z500 U10000 E8000    ; Maximum speeds (mm/min)
-    M566 X480 Y480 Z800 U200 E3000          ; Maximum jerk speeds mm/minute
+    M201 X700 Y700 Z10 U1000 E1300:1300          ; Accelerations (mm/s^2)
+    M203 X10000 Y10000 Z500 U10000 E8000:8000    ; Maximum speeds (mm/min)
+    M566 X480 Y480 Z800 U200 E3000:3000          ; Maximum jerk speeds mm/minute
 
     M92 X200 Y200                               ; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
     M92 Z3200                                  ; Steps/mm for Z - TR8*4 / 0.9 deg stepper
     M92 30.578                                 ; Steps/mm for tool lock geared motor - again, LDO
-    M92 E830
+    M92 E830:409
+ 
 
 
 ; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,5 +86,8 @@ M98 P"/sys/tool_0.g"
 M98 P"/sys/tool_1.g"
 M98 P"/sys/bed_heater.g"
 
+M563 P2 S"Pen"
 
-G10 P0 Z-3.20
+G10 P0 Z-3.45
+G10 P1 Z-5.7
+
