@@ -1,0 +1,22 @@
+{"defaults" :
+ {"wipe" : {"n" : 1, "distance" : 4},
+  "docking" : {"y" : 320, "offset" : 55, "retract" : 21, "overshoot" : 0.5}},
+ 
+ "tools" :
+
+ {"0" : {
+     "name" : "Extruder 0",
+     "description" : "Default Jubilee BMG extruder",
+     "docking" : {"x" : 10}
+ },
+  "1" : {
+     "name" : "Extruder 1",
+     "description" : "Hemera!",
+     "docking" : {"x" : 130}
+  },
+  "2" : {
+      "name" : "Pen Plotter",
+      "description" : "Default passive pen plotter",
+      "docking" : {"x" : 210},
+      "wipe" : {"n": 0}
+  }}}
