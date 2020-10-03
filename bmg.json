@@ -1,0 +1,13 @@
+{"axes" : [
+    {"name" : "E",
+     "driver" : "1.0",
+     "invert" : true,
+     "microsteps" : 16,
+     "chopmode" : 2,
+     "current" : 1250,
+     "acceleration" : 1300,
+     "velocity" : 8000,
+     "jerk" : 3000,
+     "steps/mm" : 830
+    }
+]}

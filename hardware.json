@@ -1,0 +1,38 @@
+{"axes":[
+    {"name" : "X",
+     "driver" : 0,
+     "invert" : true,
+     "microsteps" : 16,
+     "current" : 1900,
+     "acceleration" : 700,
+     "velocity" : 10000,
+     "jerk" : 480,
+     "steps/mm" : 200
+    },
+    {"name" : "Y",
+     "merge" : ["X"],
+     "driver" : 2
+    },
+    {"name" : "Z",
+     "driver" : 3,
+     "invert" : false,
+     "microsteps" : 16,
+     "current" : 1700,
+     "acceleration" : 10,
+     "velocity" : 500,
+     "jerk" : 800,
+     "steps/mm" : 3200
+    },
+    {"name" : "Z", "driver" : 4},
+    {"name" : "Z", "driver" : 5},
+    {"name" : "U",
+     "driver" : 1,
+     "invert" : true,
+     "microsteps" : 4,
+     "current" : 800,
+     "acceleration" : 1000,
+     "velocity" : 10000,
+     "jerk" : 200,
+     "steps/mm" : "30.587"
+    }
+]}
