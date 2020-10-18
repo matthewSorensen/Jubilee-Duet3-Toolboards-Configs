@@ -23,6 +23,8 @@
     M584 U1                                     ; U for toolchanger lock
     M584 Z3:4:5                                 ; Z has three drivers for kinematic bed suspension
     M584 E1.0:1.1                               ; Two extruders on the 3HC expansion board 
+    M584 V1.2                                   ; Pen plotter axis - on the expansion board as well
+
 
     M569 P0 S1                                  ; Drive 0 | X stepper   
     M569 P2 S1                                  ; Drive 2 | Y Stepper
@@ -34,7 +36,11 @@
     M569 P5 S0                                  ; Drive 5 | Front Right Z
 
     M569 P1.0 D2  S1                            ; Drive 1.0 | Extruder 0
-    M569 P1.1 D2  S1                            ; Drive 1.0 | Extruder 0
+    M569 P1.1 D2  S1                            ; Drive 1.0 | Extruder 1
+
+    M569 P1.2 D2  S1                            ; Drive 1.0 | Pen plotter 0
+
+
 
 
 ; Kinematics -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,27 +58,30 @@
     M350 U4 I1                                  ; Set 4x for toolchanger lock. Use interpolation.
     M350 Z16 I1                                 ; Set 16x microstepping for Z axes. Use interpolation.
     M350 E16 I1                                 ; Set 16x microstepping for Extruder axes. Use interpolation.
+    M350 V16 I1                                 ; Set 16x microstepping for Plotter axis. Use interpolation.
 
-    M906 X1900 Y1900 Z1700 E1250:1330 I30            ; Motor currents (mA) and Idle percentage
+    M906 X1900 Y1900 Z1700 E1250:1330 I30       ; Motor currents (mA) and Idle percentage
     M906 U800 I60                               ; For LDO motor
+    M906 V1000                                  ; Probably a bit overkill
 
     
-    M201 X700 Y700 Z10 U1000 E1300:1300          ; Accelerations (mm/s^2)
-    M203 X10000 Y10000 Z500 U10000 E8000:8000    ; Maximum speeds (mm/min)
-    M566 X480 Y480 Z800 U200 E3000:3000          ; Maximum jerk speeds mm/minute
+    M201 X700 Y700 Z10 U1000 E1300:1300 V2000          ; Accelerations (mm/s^2)
+    M203 X10000 Y10000 Z500 U10000 E8000:8000 V10000    ; Maximum speeds (mm/min)
+    M566 X480 Y480 Z800 U200 E3000:3000 V4000         ; Maximum jerk speeds mm/minute
 
     M92 X200 Y200                               ; Steps/mm for X,Y with 16 tooth pulleys (preferred). 
     M92 Z3200                                  ; Steps/mm for Z - TR8*4 / 0.9 deg stepper
     M92 30.578                                 ; Steps/mm for tool lock geared motor - again, LDO
     M92 E830:409
- 
+    M92 V63.66  ; 16mm pulley, 0.9 degree, 16x micro
 
 
-; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------
-;
+; Endstops, Probes, and Axis Limits --------------------------------------------------------------------------------------------------------------------------------------------;
+
     M574 X1 S1 P"io0.in"                        ; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
     M574 Y1 S1 P"io1.in"                        ; Dito
     M574 U1 S1 P"io3.in"                        ; Dito
+    M574 V1 S1 P"1.io0.in"                        ; Set homing switch configuration Y1 = low-end, S1 = active-high (NC)
 
     M558 P5 C"io4.in" H3 A1 T6000 S0.02
 
@@ -86,7 +95,12 @@ M98 P"/sys/tool_0.g"
 M98 P"/sys/tool_1.g"
 M98 P"/sys/bed_heater.g"
 
-M563 P2 S"Pen"
+M563 P2 S"Microscope"
+M950 P0 C"1.io1.out" Q1000
+M42 P0 S0
+
+
+M563 P3 S"Active Pen"
 
 G10 P0 Z-3.45
 G10 P1 Z-5.7

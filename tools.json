@@ -12,11 +12,17 @@
   "1" : {
      "name" : "Extruder 1",
      "description" : "Hemera!",
-     "docking" : {"x" : 130}
+     "docking" : {"x" : 120}
   },
   "2" : {
-      "name" : "Pen Plotter",
-      "description" : "Default passive pen plotter",
+      "name" : "Microscope",
+      "description" : "Fancy microscope tool",
       "docking" : {"x" : 210},
+      "wipe" : {"n": 0}
+  },
+  "3" : {
+      "name" : "Plotter",
+      "description" : "Stepper-actuated plotter tool",
+      "docking" : {"x" : 285},
       "wipe" : {"n": 0}
   }}}
